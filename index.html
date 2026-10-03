@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareConnect</title>
+
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="app">
+
+    <header>
+        <h1>CareConnect 🏥</h1>
+        <p>Find nearby healthcare & book appointments</p>
+    </header>
+
+    <div class="content">
+
+        <!-- FIND CARE -->
+        <section id="find" class="screen active">
+
+            <div class="card">
+                <b>Choose your location</b>
+
+                <div class="row">
+
+                    <input
+                        id="locationInput"
+                        class="input"
+                        placeholder="Enter city / area">
+
+                    <button onclick="searchLocation()">
+                        Search
+                    </button>
+
+                </div>
+
+                <button onclick="useGPS()">
+                    📍 Use My Current Location
+                </button>
+
+                <div id="status" class="status">
+                    Enter a location or allow GPS.
+                </div>
+            </div>
+
+            <div id="map"></div>
+
+            <h3>Nearby Healthcare</h3>
+
+            <div id="places" class="small">
+                Search a location to load hospitals and clinics.
+            </div>
+
+        </section>
+
+        <!-- APPOINTMENTS -->
+        <section id="appointments" class="screen">
+
+            <h2>My Appointments</h2>
+
+            <div id="appointmentsList"
+                 class="card small">
+
+                No appointments yet.
+
+            </div>
+
+        </section>
+
+        <!-- VISIT PLAN -->
+        <section id="plan" class="screen">
+
+            <h2>Plan Your Visit</h2>
+
+            <div class="card">
+
+                <b>Before you go</b>
+
+                <p class="small">
+                    ✓ Carry ID and medical documents
+                    <br><br>
+
+                    ✓ Check clinic status
+                    <br><br>
+
+                    ✓ Reach a few minutes early
+                </p>
+
+            </div>
+
+        </section>
+
+    </div>
+
+    <!-- BOTTOM NAVIGATION -->
+    <div class="nav">
+
+        <button id="findNav"
+                class="active"
+                onclick="showScreen('find')">
+            🏥
+            <br>
+            Find Care
+        </button>
+
+        <button id="appointmentNav"
+                onclick="showScreen('appointments')">
+            📅
+            <br>
+            Appointments
+        </button>
+
+        <button id="planNav"
+                onclick="showScreen('plan')">
+            🗓️
+            <br>
+            Visit Plan
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- BOOKING POPUP -->
+
+<div id="bookingModal" class="modal">
+
+    <div class="sheet">
+
+        <button class="secondary"
+                onclick="closeBooking()">
+            ← Back
+        </button>
+
+        <h2 id="hospitalName">
+            Book Appointment
+        </h2>
+
+        <div id="hospitalAddress"
+             class="small">
+        </div>
+
+        <label>Patient Name</label>
+
+        <input
+            id="patientName"
+            class="input"
+            placeholder="Enter patient name">
+
+        <label>Appointment Date</label>
+
+        <input
+            id="appointmentDate"
+            type="date"
+            class="input">
+
+        <label>Select Time</label>
+
+        <div id="slots">
+
+            <span class="slot"
+                  onclick="selectSlot(this)">
+                10:00 AM
+            </span>
+
+            <span class="slot"
+                  onclick="selectSlot(this)">
+                11:30 AM
+            </span>
+
+            <span class="slot"
+                  onclick="selectSlot(this)">
+                2:00 PM
+            </span>
+
+            <span class="slot"
+                  onclick="selectSlot(this)">
+                4:30 PM
+            </span>
+
+        </div>
+
+        <button
+            class="confirm-btn"
+            onclick="bookAppointment()">
+
+            Confirm Appointment
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
